@@ -11,8 +11,8 @@ test('Escaped text', () => {
 });
 
 test('Headings', () => {
-  const mrkdown = '# heading 1\n## heading 2\n### heading 3';
-  const slack = '*heading 1*\n\n*heading 2*\n\n*heading 3*\n';
+  const mrkdown = '# heading 1\n## heading 2\n### heading 3\n#### heading 4';
+  const slack = '*heading 1*\n\n*heading 2*\n\n    *heading 3*\n\n        *heading 4*\n';
   expect(slackifyMarkdown(mrkdown)).toBe(slack);
 });
 
@@ -46,7 +46,7 @@ test('Strike', () => {
 
 test('Unordered list', () => {
   const mrkdown = '* list\n* list\n* list';
-  const slack = '•   list\n•   list\n•   list\n';
+  const slack = '        •   list\n        •   list\n        •   list\n';
   expect(slackifyMarkdown(mrkdown)).toBe(slack);
 });
 

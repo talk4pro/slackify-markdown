@@ -7,7 +7,9 @@ const zeroWidthSpace = String.fromCharCode(0x200B);
 const visitors = {
   heading(node) {
     // make headers to be just *strong*
-    return wrap(this.content(node), '*');
+    const spacesNumber = Math.max((node.depth - 2) * 4, 0);
+    const spaces = ' '.repeat(spacesNumber);
+    return wrap(this.content(node), `${spaces}*`);
   },
 
   strong(node) {
@@ -28,7 +30,7 @@ const visitors = {
     return node.children.map((child, index) => {
       const bullet = node.ordered
         ? `${node.start + index}.`
-        : '•';
+        : '        •';
       return listItem(child, node, index, bullet);
     }).join('\n');
   },
